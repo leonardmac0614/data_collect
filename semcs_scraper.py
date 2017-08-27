@@ -27,7 +27,7 @@ def simple_request():
     # print '-- 浓度 ---\n'
     date = datetime.datetime.now().strftime('%Y-%m-%d')
     columns=["sitename", "co","pm10","pm101","so2","siteid","no2","pm251",'o3',"pm25"]
-    with open(date+"data.csv","ab") as csvfile:
+    with open("/root/data_collect/"+date+"data.csv","ab") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['--- 更新时间---'.decode('utf8').encode('GBK'),dt.strftime('%Y/%m/%d-%H'),'-- 浓度 ---'.decode('utf8').encode('GBK')])
         # writer.writerow(dt.strftime('%Y/%m/%d-%H'))
