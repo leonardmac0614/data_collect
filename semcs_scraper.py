@@ -8,7 +8,8 @@ import csv
 import sys
 import commands
 import json
-
+import os,sys
+os.chdir(os.path.dirname(sys.argv[0]))
 reload(sys)
 sys.setdefaultencoding("utf8")
 
