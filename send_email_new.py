@@ -12,9 +12,9 @@ import datetime
 date = (datetime.datetime.now()-datetime.timedelta(days=1)).strftime('%Y-%m-%d')
 # date = datetime.datetime.now().strftime('%Y-%m-%d')
 From = "lbyglsl@163.com"
-To = "liuguohui311@163.com" 
+To = "liuguohui311@163.com"
 # To = "405666135@qq.com" # "liuguohui311@163.com"
-file_name = "/root/data_collect/his_data/"+str(date)+ "data.csv" #附件名
+file_name = "/root/data_collect/his_data/"+str(date)+ "filter_data.csv" #附件名
 server = smtplib.SMTP_SSL("smtp.163.com", 465)
 # server = smtplib.SMTP("smtp.163.com")
 server.login("lbyglsl@163.com","2520457") #仅smtp服务器需要验证时
@@ -41,7 +41,7 @@ main_msg.attach(file_msg)
 # 设置根容器属性
 main_msg['From'] = From
 main_msg['To'] = To
-main_msg['Subject'] = "昨日上海环境数据"
+main_msg['Subject'] = "昨日上海co no2 pm2.5数据"
 main_msg['Date'] = email.Utils.formatdate( )
 
 # 得到格式化后的完整文本

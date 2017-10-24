@@ -9,7 +9,6 @@ import sys
 import commands
 import json
 import os,sys
-os.chdir(os.path.dirname(sys.argv[0]))
 reload(sys)
 sys.setdefaultencoding("utf8")
 
@@ -18,7 +17,7 @@ def simple_request():
     headers = {
         'Content-Type': 'application/x-amf'
     }
-    r = requests.post('http://www.semc.gov.cn/aqi/Gateway.aspx', headers=headers, data=io.open('./requests', 'rb'))
+    r = requests.post('http://www.semc.gov.cn/aqi/Gateway.aspx', headers=headers, data=io.open('/root/data_collect/requests', 'rb'))
     res = remoting.decode(r.content)
     # print '--- updated time----\n'
     rawDate = res.bodies[4][1].body.body
@@ -26,9 +25,11 @@ def simple_request():
     dt = datetime.datetime.strptime(a, '%Y/%m/%d/%H/')
     # print dt.strftime('%Y/%m/%d-%H')
     # print '-- 浓度 ---\n'
-    date = datetime.datetime.now().strftime('%Y-%m-%d')
+    date = (datetime.datetime.now()-datetime.timedelta(hours=1)).strftime('%Y-%m-%d')
+    #date = datetime.datetime.now().strftime('%Y-%m-%d')
+    # date =datetime.datetime.strptime(a, '%Y-%m-%d')
     columns=["sitename", "co","pm10","pm101","so2","siteid","no2","pm251",'o3',"pm25"]
-    with open("/root/data_collect/"+date+"data.csv","ab") as csvfile:
+    with open("/root/data_collect/his_data/"+date+"data.csv","ab") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['--- 更新时间---'.decode('utf8').encode('GBK'),dt.strftime('%Y/%m/%d-%H'),'-- 浓度 ---'.decode('utf8').encode('GBK')])
         # writer.writerow(dt.strftime('%Y/%m/%d-%H'))
